@@ -21,35 +21,23 @@
         />
 
     <ListView
-        android:id="@+id/list_tb"
-        android:layout_width="match_parent"
-        android:layout_height="460dp"
-        android:layout_marginTop="-95dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <android.widget.Button
-        android:id="@+id/bt_View"
-        android:layout_width="130dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="30dp"
-        android:background="@color/btn"
-        android:onClick="GetTextFromSql"
-        android:text="Вывести"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/bt_add"
+        android:id="@+id/BD_Hotel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/bt_add"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_tb" />
+        app:layout_constraintTop_toBottomOf="@+id/t_header"
+        />
 
     <android.widget.Button
         android:id="@+id/bt_add"
         android:layout_width="130dp"
         android:layout_height="35dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"
         android:background="@color/btn"
         android:onClick="GoAdd"
@@ -57,7 +45,7 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/bt_View"
-        app:layout_constraintTop_toBottomOf="@+id/list_tb" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BD_Hotel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

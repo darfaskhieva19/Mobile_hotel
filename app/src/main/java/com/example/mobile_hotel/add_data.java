@@ -36,4 +36,7 @@ public class add_data extends AppCompatActivity {
     public void add(View view) { //Добавление записи
 
     }
+
+    public void ChoosePhoto(View view) {
+    }
 }
