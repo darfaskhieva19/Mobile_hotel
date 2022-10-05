@@ -83,8 +83,28 @@ public class add_data extends AppCompatActivity {
     }
 
     public void ChoosePhoto(View view) {
-
+        /*imageView.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            pickImg.launch(intent);        });*/
     }
+
+    /*private final ActivityResultLauncher<Intent> pickImg = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        if (result.getResultCode() == RESULT_OK) {
+            if (result.getData() != null) {
+                Uri uri = result.getData().getData();
+                try {
+                    InputStream is = getContentResolver().openInputStream(uri);
+                    Bitmap bitmap = BitmapFactory.decodeStream(is);
+                    imageView.setImageBitmap(bitmap);
+                    encodedImage = encodeImage(bitmap);
+                } catch (Exception e) {
+
+                }
+            }
+        }
+    });*/
+
     /*private void gImg()
     {
         Intent intent = new Intent();

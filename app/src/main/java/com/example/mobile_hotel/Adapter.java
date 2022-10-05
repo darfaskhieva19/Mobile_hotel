@@ -16,7 +16,7 @@ import java.util.List;
 public class Adapter extends BaseAdapter {
 
     private Context mContext;
-    List<Hotel> hotelList;
+    /*List<Hotel> hotelList;*/
 
     public Adapter(Context mContext, List<Hotel> maskList) {
         this.mContext = mContext;
