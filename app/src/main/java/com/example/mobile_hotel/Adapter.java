@@ -9,12 +9,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Button;
 
 import java.util.List;
 
 public class Adapter extends BaseAdapter {
 
     private Context mContext;
+    List<Hotel> hotelList;
 
     public Adapter(Context mContext, List<Hotel> maskList) {
         this.mContext = mContext;
@@ -66,6 +68,17 @@ public class Adapter extends BaseAdapter {
         NumberOfStars.setText(Integer.toString(mask.getNumberOfStars()));
 
         Image.setImageBitmap(getUserImage(mask.getImage()));
+        /*Button bt_go = v.findViewById(R.id.bt_go);
+
+        bt_go.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, add_data.class);
+                intent.putExtra(Hotel.class.getSimpleName(), book);
+                mContext.startActivity(intent);
+            }
+        });*/
+
 
         return v;
     }

@@ -14,9 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mobile_hotel">
         <activity
-            android:name=".Adapter"
-            android:exported="false" />
-        <activity
             android:name=".add_data"
             android:exported="false" />
         <activity

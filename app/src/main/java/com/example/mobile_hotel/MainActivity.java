@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
