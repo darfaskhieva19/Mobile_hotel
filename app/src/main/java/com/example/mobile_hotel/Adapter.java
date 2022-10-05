@@ -53,13 +53,15 @@ public class Adapter extends BaseAdapter {
 
         View v = View.inflate(mContext,R.layout.item_hotel,null);
 
-        TextView Country = v.findViewById(R.id.Country);
-        TextView City = v.findViewById(R.id.City);
-        TextView Title = v.findViewById(R.id.Title);
-        TextView NumberOfStars = v.findViewById(R.id.NumberOfStars);
-        ImageView Image = v.findViewById(R.id.Image);
+        TextView Country = v.findViewById(R.id.tx_Country);
+        TextView City = v.findViewById(R.id.tx_City);
+        TextView Title = v.findViewById(R.id.tx_Title);
+        TextView NumberOfStars = v.findViewById(R.id.tx_NumberOfStars);
+        ImageView Image = v.findViewById(R.id.Img);
 
         Hotel mask = maskList.get(position);
+        Country.setText(mask.getCountry());
+        City.setText(mask.getCity());
         Title.setText(mask.getTitle());
         NumberOfStars.setText(Integer.toString(mask.getNumberOfStars()));
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-       android:id="@+id/Image"
+       android:id="@+id/Img"
        android:layout_width="160dp"
        android:layout_height="160dp"
        app:layout_constraintStart_toStartOf="parent"
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Image"
+        app:layout_constraintStart_toEndOf="@+id/Img"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Image"
+        app:layout_constraintStart_toEndOf="@+id/Img"
         app:layout_constraintTop_toBottomOf="@+id/tx_Country"  />
 
     <TextView
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Image"
+        app:layout_constraintStart_toEndOf="@+id/Img"
         app:layout_constraintTop_toBottomOf="@+id/tx_City"/>
 
     <TextView
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Image"
+        app:layout_constraintStart_toEndOf="@+id/Img"
         app:layout_constraintTop_toBottomOf="@+id/tx_Title"
         />
 
@@ -59,7 +59,7 @@
         android:background="@color/btn"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Image"
+        app:layout_constraintStart_toEndOf="@+id/Img"
         app:layout_constraintTop_toBottomOf="@+id/tx_NumberOfStars"  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
