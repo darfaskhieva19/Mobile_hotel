@@ -1,53 +1,80 @@
 package com.example.mobile_hotel;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.Image;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.EditText;
-
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.ResultSet;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Base64;
 
 
 public class add_data extends AppCompatActivity {
 
+    EditText Country, City, Title, NumberOfStars;
+    ImageView Image;
     Connection connection;
-    String Image;
-    private ImageView imageButton;
+    String ConnectionResult = "";
+    String Img="";
+    Hotel hotel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_data);
 
-        String image = "";
-        imageButton = findViewById(R.id.Photo);
+        Country = (EditText) findViewById(R.id.Country);
+        City = (EditText) findViewById(R.id.City);
+        Title = (EditText) findViewById(R.id.Title);
+        NumberOfStars = (EditText) findViewById(R.id.NumberOfStars);
+        Image = (ImageView) findViewById(R.id.Img);
+
+        /*Bundle obj = getIntent().getExtras();
+        if(obj!=null){
+            hotel = obj.getParcelable(Hotel.class.getSimpleName());
+            Country.setText(hotel.getCountry());
+            City.setText(hotel.getCity());
+            Title.setText(hotel.getTitle());
+            NumberOfStars.setText(Integer.toString(hotel.getNumberOfStars()));
+        }*/
     }
 
-    public void delete(View view) { //Очистить
-        try {
-           /* Country.setText("");
-            City.setText("");
-            Title.setText("");
-            NumberOfStars.setText("");*/
-        }
-        catch (Exception ex)
-        {
-            Log.e("Error", ex.getMessage());
-        }
+    private void getImg()
+    {
+        Intent intentChooser= new Intent();
+        intentChooser.setType("image/*");
+        intentChooser.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intentChooser,1);
     }
 
-    public void back(View view) { //Выход на главный экран
-        Intent intent  = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    public String encodeImg(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] b = byteArrayOutputStream.toByteArray();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Img= Base64.getEncoder().encodeToString(b);
+            return Img;
+        }
+        return "";
     }
 
     public void add(View view) { //Добавление записи
@@ -67,11 +94,11 @@ public class add_data extends AppCompatActivity {
                     query = "INSERT INTO Hotel (Country, City, Title, NumberOfStars) VALUES ('"+Country.getText()+"', '"+City.getText()+"', '"+Title.getText()+"', '"+NumberOfStars.getText()+"')";
                 }
                 else{
-                    query = "INSERT INTO Hotel (Country, City, Title, NumberOfStars, Image) VALUES ('" + Country.getText() + "', '" + City.getText() + "', '"+ Image +"', '" + Title.getText() + "', '"+NumberOfStars.getText()+")";
+                    query = "INSERT INTO Hotel (Country, City, Title, NumberOfStars, Image) VALUES ('" + Country.getText() + "', '" + City.getText() + "', '" + Title.getText() + "', '"+NumberOfStars.getText()+"' '"+ Image +"')";
                 }
 
                 Statement statement = connection.createStatement();
-                Toast.makeText(this, "Успешное добавление!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Успешное добавление записи!", Toast.LENGTH_LONG).show();
                 statement.executeUpdate(query);
             }
         }
@@ -79,37 +106,28 @@ public class add_data extends AppCompatActivity {
         {
             Log.e("Error", ex.getMessage());
         }
+    }
 
+    public void back(View view) { //Выход на главный экран
+        Intent intent  = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void delete(View view) { //Очистить поля
+        try {
+            Country.setText("");
+            City.setText("");
+            Title.setText("");
+            NumberOfStars.setText("");
+            Image.setImageResource(R.drawable.photo);
+        }
+        catch (Exception ex)
+        {
+            Log.e("Error", ex.getMessage());
+        }
     }
 
     public void ChoosePhoto(View view) {
-        /*imageView.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            pickImg.launch(intent);        });*/
+        getImg();
     }
-
-    /*private final ActivityResultLauncher<Intent> pickImg = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-        if (result.getResultCode() == RESULT_OK) {
-            if (result.getData() != null) {
-                Uri uri = result.getData().getData();
-                try {
-                    InputStream is = getContentResolver().openInputStream(uri);
-                    Bitmap bitmap = BitmapFactory.decodeStream(is);
-                    imageView.setImageBitmap(bitmap);
-                    encodedImage = encodeImage(bitmap);
-                } catch (Exception e) {
-
-                }
-            }
-        }
-    });*/
-
-    /*private void gImg()
-    {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivity(intent,1);
-    }*/
 }

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".update_data">
 
     <TextView
         android:id= "@+id/t_header"
@@ -19,24 +20,47 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
+    <ImageView
+        android:id="@+id/Photo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/t_header" />
+
     <EditText
-        android:id="@+id/Country"
+        android:id="@+id/Kod"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:gravity="start|top"
+        app:layout_constraintHorizontal_bias="0.1"
+        android:hint="Код"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/Ed_Country"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Photo" />
+
+    <EditText
+        android:id="@+id/Ed_Country"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:gravity="start|top"
         android:hint="Страна"
         android:inputType="textMultiLine"
-        app:layout_constraintBottom_toTopOf="@+id/City"
+        app:layout_constraintBottom_toTopOf="@+id/Ed_City"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/t_header"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/Kod" />
 
     <EditText
-        android:id="@+id/City"
+        android:id="@+id/Ed_City"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="30dp"
@@ -45,13 +69,13 @@
         android:gravity="start|top"
         android:hint="Город"
         android:inputType="textMultiLine"
-        app:layout_constraintBottom_toTopOf="@+id/Title"
+        app:layout_constraintBottom_toTopOf="@+id/Ed_Title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Country" />
+        app:layout_constraintTop_toBottomOf="@+id/Ed_Country" />
 
     <EditText
-        android:id="@+id/Title"
+        android:id="@+id/Ed_Title"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="30dp"
@@ -61,13 +85,13 @@
         android:gravity="start|top"
         android:hint="Название отеля"
         android:inputType="textMultiLine"
-        app:layout_constraintBottom_toTopOf="@+id/NumberOfStars"
+        app:layout_constraintBottom_toTopOf="@+id/Ed_NumberOfStars"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/City" />
+        app:layout_constraintTop_toBottomOf="@+id/Ed_City" />
 
     <EditText
-        android:id="@+id/NumberOfStars"
+        android:id="@+id/Ed_NumberOfStars"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="30dp"
@@ -78,52 +102,52 @@
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Title" />
+        app:layout_constraintTop_toBottomOf="@+id/Ed_Title" />
 
     <android.widget.Button
         android:id="@+id/bt_add"
         android:layout_width="130dp"
-        android:layout_height="35dp"
+        android:layout_height="38dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"
-        android:background="@color/btn"
+        android:background="@drawable/btn_color"
         android:onClick="GoEdit"
-        android:text="Изменить"
+        android:text="Сохранить изменения"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/bt_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NumberOfStars" />
+        app:layout_constraintTop_toBottomOf="@+id/Ed_NumberOfStars" />
 
     <android.widget.Button
         android:id="@+id/bt_back"
         android:layout_width="130dp"
-        android:layout_height="35dp"
+        android:layout_height="38dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"
-        android:background="@color/btn"
+        android:background="@drawable/btn_color"
         android:onClick="GoBack"
         android:text="Назад"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/bt_add"
-        app:layout_constraintTop_toBottomOf="@+id/NumberOfStars" />
+        app:layout_constraintTop_toBottomOf="@+id/Ed_NumberOfStars" />
 
     <android.widget.Button
         android:id="@+id/bt_clean"
         android:layout_width="130dp"
-        android:layout_height="35dp"
+        android:layout_height="38dp"
         android:layout_marginBottom="30dp"
         android:layout_marginTop="120dp"
-        android:background="@color/btn"
+        android:background="@drawable/btn_color"
         android:onClick="GoDelete"
         android:text="Удалить"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NumberOfStars" />
+        app:layout_constraintTop_toBottomOf="@+id/Ed_NumberOfStars" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,7 +28,8 @@ public class Hotel implements Parcelable {
         }
 
         @Override
-        public Hotel[] newArray(int size) {
+        public Hotel[] newArray(int size)
+        {
             return new Hotel[size];
         }
     };
