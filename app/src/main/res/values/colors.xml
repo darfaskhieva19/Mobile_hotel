@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="btn">#0099ff</color>
+    <color name="seach">#87CEFA</color>
 </resources>

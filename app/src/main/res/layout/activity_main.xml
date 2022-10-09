@@ -6,33 +6,68 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+    <LinearLayout
+        android:id="@+id/line"
+        android:layout_width="413dp"
+        android:layout_height="49dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:entries="@array/spinIt" />
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/spinner"
+            app:layout_constraintTop_toBottomOf="@+id/line"/>
+
+        <android.widget.Button
+            android:id="@+id/btnSearch"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/btn_color"
+            android:text="@string/Ssearch"
+            app:layout_constraintBottom_toTopOf="@+id/BD_Hotel"/>
+
+        <android.widget.Button
+            android:id="@+id/btnClear"
+            android:layout_width="95dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/btn_color"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/BD_Hotel"
+            android:text="Сброс"/>
+    </LinearLayout>
+
     <TextView
-        android:id= "@+id/t_header"
-        android:layout_marginTop="20dp"
+        android:id="@+id/t_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Список отелей"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/line" />
 
     <ListView
         android:id="@+id/BD_Hotel"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toTopOf="@+id/bt_add"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,5 +89,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BD_Hotel" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@
         android:layout_marginTop="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Изменение данных"
+        android:text="Изменение и удаление данных"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -21,27 +21,27 @@
         />
 
     <ImageView
-        android:id="@+id/Photo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:id="@+id/UpPhoto"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_UpPhoto"
+        app:layout_constraintTop_toBottomOf="@+id/t_header"
+        />
+
+    <android.widget.Button
+        android:id="@+id/btn_UpPhoto"
+        android:layout_width="130dp"
+        android:layout_height="35dp"
+        android:background="@drawable/btn_color"
+        android:onClick="ChoosePhoto"
+        android:text="Выбрать фото"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/Ed_Country"
+        app:layout_constraintEnd_toStartOf="@+id/UpPhoto"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/t_header" />
-
-    <EditText
-        android:id="@+id/Kod"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:gravity="start|top"
-        app:layout_constraintHorizontal_bias="0.1"
-        android:hint="Код"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toTopOf="@+id/Ed_Country"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Photo" />
 
     <EditText
         android:id="@+id/Ed_Country"
@@ -57,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Kod" />
+        app:layout_constraintTop_toBottomOf="@+id/UpPhoto" />
 
     <EditText
         android:id="@+id/Ed_City"
@@ -115,38 +115,23 @@
         android:text="Сохранить изменения"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/bt_back"
+        app:layout_constraintEnd_toStartOf="@+id/bt_delete"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Ed_NumberOfStars" />
 
     <android.widget.Button
-        android:id="@+id/bt_back"
+        android:id="@+id/bt_delete"
         android:layout_width="130dp"
         android:layout_height="38dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"
-        android:background="@drawable/btn_color"
-        android:onClick="GoBack"
-        android:text="Назад"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/bt_add"
-        app:layout_constraintTop_toBottomOf="@+id/Ed_NumberOfStars" />
-
-    <android.widget.Button
-        android:id="@+id/bt_clean"
-        android:layout_width="130dp"
-        android:layout_height="38dp"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="120dp"
         android:background="@drawable/btn_color"
         android:onClick="GoDelete"
         android:text="Удалить"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bt_add"
         app:layout_constraintTop_toBottomOf="@+id/Ed_NumberOfStars" />
 
 

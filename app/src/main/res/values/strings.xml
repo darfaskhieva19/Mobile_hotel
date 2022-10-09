@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Mobile_hotel</string>
+    <string-array name="spinIt">
+        <item></item>
+        <item>По стране</item>
+        <item>По кол-ву звезд отеля</item>
+    </string-array>
+    <string name="Ssearch">🔎</string>
 </resources>
