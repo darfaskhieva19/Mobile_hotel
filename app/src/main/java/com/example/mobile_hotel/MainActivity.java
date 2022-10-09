@@ -1,13 +1,16 @@
 package com.example.mobile_hotel;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.text.TextWatcher;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.EditText;
@@ -32,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     EditText search;
     Spinner spinner;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,61 +42,104 @@ public class MainActivity extends AppCompatActivity {
 
         v = findViewById(com.google.android.material.R.id.ghost_view);
         GetTextFromSQL(v);
+
+        Sortirovka();
+        //String[] it = {"<по умолчанию>", "Страна", "Кол-во звезд отеля"};
     }
 
-    public  void  setupSort()
+    public  void  Sortirovka() //сортировка
     {
-        ArrayAdapter<CharSequence> adapter =ArrayAdapter.createFromResource(this,R.array.spinIt, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner=findViewById(R.id.spinner);
-        spinner.setAdapter(adapter);
+        try {
+            spinner = findViewById(R.id.Spin);
+            List<String> list = new ArrayList<String>();
+            list.add("Без фильтра");
+            list.add("Сортировка по странам");
+            list.add("Сортировка по возрастанию кол-во звезд");
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(dataAdapter);
+            String st = null;
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                    switch (position) {
+                        case 0: {
+                            sortByN(st);
 
+                        }
+                        break;
+                        case 1: {
+                            sortByCountry(st);
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                if(position == 0)
-                {
-                    sortByCountry();
+                        }
+                        break;
+                        case 2: {
+                            sortByNumberOfStars(st);
+                        }
+                        break;
+                    }
                 }
-                else
-                {
-                    sortByNumberOfStars();
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
                 }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
+            });
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(MainActivity.this,"Что-то не так", Toast.LENGTH_LONG).show();
+        }
     }
 
-    public  void  sortByCountry()
+    public  void  sortByN(String st) //запрос на сортировку
     {
-        String st = null;
-        st = "Select * From Hotel ORDER BY Country";
-        Sortirovka(st);
+        try {
+            st = "Select * From Hotel";
+            selectSort(st);
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(MainActivity.this,"Что-то не так", Toast.LENGTH_LONG).show();
+        }
+    }
+    public  void  sortByCountry(String st)//запрос на сортировку
+    {
+        try {
+            st = "Select * From Hotel ORDER BY Country";
+            selectSort(st);
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(MainActivity.this,"Что-то не так", Toast.LENGTH_LONG).show();
+        }
     }
 
-    public  void  sortByNumberOfStars()
+    public  void  sortByNumberOfStars(String st)//запрос на сортировку
     {
-        String st = null;
-        st = "Select * From Hotel ORDER BY NumberOfStars";
-        Sortirovka(st);
+        try {
+            st = "Select * From Hotel ORDER BY NumberOfStars";
+            selectSort(st);
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(MainActivity.this,"Что-то так", Toast.LENGTH_LONG).show();
+        }
     }
-    public  void  Sortirovka(String st)
+
+    public  void  selectSort(String s)//вывод сортировки
     {
         data = new ArrayList<Hotel>();
         listView = findViewById(R.id.BD_Hotel);
         pAdapter = new Adapter(MainActivity.this, data);
-        try
-        {
-            ConnectionHelper connectionHelpers = new ConnectionHelper();
-            connection = connectionHelpers.connectionClass();
-            if (connection !=null)
+        try {
+            ConnectionHelper connectionHelper = new ConnectionHelper();
+            connection = connectionHelper.connectionClass();
+            if (connection != null)
             {
-                String query = st;
+                String query = "Select * From Hotel";
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
+
                 while (resultSet.next())
                 {
                     Hotel tempMask = new Hotel
@@ -110,18 +155,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 connection.close();
             }
-            else
-            {
-                ConnectionResult="Check Connection";
-            }
         }
-        catch (Exception ex)
+        catch (SQLException throwables)
         {
-            Toast.makeText(MainActivity.this,"Что-то не так", Toast.LENGTH_LONG).show();
+            throwables.printStackTrace();
         }
         enterMobile();
     }
-
 
     public void enterMobile() {
         pAdapter.notifyDataSetInvalidated();
@@ -168,4 +208,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, add_data.class);
         startActivity(intent);
     }
+
 }

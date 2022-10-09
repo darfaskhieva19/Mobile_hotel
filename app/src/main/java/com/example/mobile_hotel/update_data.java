@@ -49,19 +49,6 @@ public class update_data extends AppCompatActivity {
         v = findViewById(com.google.android.material.R.id.ghost_view);
     }
 
-    public void onClickImage(View view)
-    {
-        try{
-            Intent intentChooser= new Intent();
-            intentChooser.setType("image/*");
-            intentChooser.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(intentChooser,1);
-        }
-        catch (Exception ex){
-            Toast.makeText(this,"Что-то не так", Toast.LENGTH_LONG).show();
-        }
-    }
-
     protected void onActivityResult(int request, int result, @Nullable Intent data) {
         try {
             super.onActivityResult(request, result, data);
@@ -99,8 +86,7 @@ public class update_data extends AppCompatActivity {
             }
             return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         }
-        return BitmapFactory.decodeResource(update_data.this.getResources(),
-                R.drawable.photo);
+        return BitmapFactory.decodeResource(update_data.this.getResources(),R.drawable.photo);
     }
 
     public void GoEdit(View view) { //Изменение данных
@@ -149,9 +135,16 @@ public class update_data extends AppCompatActivity {
         }
     }
 
-    public void ChoosePhoto(View view) {
+    public void OnClickImg(View view) {
+        try {
+            Intent intentChooser = new Intent();
+            intentChooser.setType("image/*");
+            intentChooser.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(intentChooser, 1);
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(this,"Ошибка", Toast.LENGTH_LONG).show();
+        }
     }
-
-
-
 }

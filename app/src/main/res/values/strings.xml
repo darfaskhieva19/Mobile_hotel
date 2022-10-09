@@ -6,4 +6,5 @@
         <item>По кол-ву звезд отеля</item>
     </string-array>
     <string name="Ssearch">🔎</string>
+    <string name="clean">⎚</string>
 </resources>

@@ -18,12 +18,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="80dp"
+            android:id="@+id/Spin"
+            android:layout_width="145dp"
             android:layout_height="50dp"
             android:entries="@array/spinIt" />
         <EditText
-            android:id="@+id/search"
+            android:id="@+id/t_search"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/spinner"
@@ -40,13 +40,14 @@
 
         <android.widget.Button
             android:id="@+id/btnClear"
-            android:layout_width="95dp"
-            android:layout_height="35dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="10dp"
+            android:text="@string/clean"
             android:background="@drawable/btn_color"
             android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/BD_Hotel"
-            android:text="Сброс"/>
+            />
     </LinearLayout>
 
     <TextView

@@ -48,39 +48,34 @@ public class add_data extends AppCompatActivity {
         Photo = (ImageView) findViewById(R.id.Img);
     }
 
+
     @Override
     protected void onActivityResult(int request, int result, @Nullable Intent data) {
-    try {
-        super.onActivityResult(request, result, data);
-        if (request == 1 && data != null && data.getData() != null) {
-            if (result == RESULT_OK) {
-                Log.d("MyLog", "Image URI : " + data.getData());
-                Photo.setImageURI(data.getData());
-                Bitmap bitmap = ((BitmapDrawable) Photo.getDrawable()).getBitmap();
-                encodeImg(bitmap);
+        try {
+            super.onActivityResult(request, result, data);
+            if (request == 1 && data != null && data.getData() != null) {
+                if (result == RESULT_OK) {
+                    Log.d("MyLog", "Image URI : " + data.getData());
+                    Photo.setImageURI(data.getData());
+                    Bitmap bitmap = ((BitmapDrawable) Photo.getDrawable()).getBitmap();
+                    encodeImg(bitmap);
+                }
             }
         }
-    }
-        catch (Exception ex) {
-        Toast.makeText(add_data.this,"Что-то не так, ошибка", Toast.LENGTH_LONG).show();
-    }
-}
-    private void getImg()
-    {
-        Intent intentChooser= new Intent();
-        intentChooser.setType("image/*");
-        intentChooser.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intentChooser,1);
-    }
-
-    public String encodeImg(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-        byte[] bytes = byteArrayOutputStream.toByteArray();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            return Base64.getEncoder().encodeToString(bytes);
+        catch (Exception ex)
+        {
+            Toast.makeText(add_data.this,"Ошибка", Toast.LENGTH_LONG).show();
         }
-        return "";
+    }
+    public String encodeImg(Bitmap bitmap) {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            byte[] bytes = byteArrayOutputStream.toByteArray();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                Img = Base64.getEncoder().encodeToString(bytes);
+                return Img;
+            }
+            return "";
     }
 
     public void add(View view) { //Добавление записи
@@ -97,6 +92,8 @@ public class add_data extends AppCompatActivity {
                     Statement statement = connection.createStatement();
                     statement.executeUpdate(query);
                     Toast.makeText(this, "Успешное добавление записи!", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
                 }
                 else {
                     ConnectionResult = "Check Connection";
@@ -108,27 +105,16 @@ public class add_data extends AppCompatActivity {
         }
     }
 
-    public void back(View view) { //Выход на главный экран
-        Intent intent  = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
-    public void delete(View view) { //Очистить поля
+    public void OnClickImage(View view) {
         try {
-            Country.setText("");
-            City.setText("");
-            Title.setText("");
-            NumberOfStars.setText("");
-            Photo.setImageResource(R.drawable.photo);
+            Intent intentChooser = new Intent();
+            intentChooser.setType("image/*");
+            intentChooser.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(intentChooser, 1);
         }
         catch (Exception ex)
         {
-            Log.e("Error", ex.getMessage());
+            Toast.makeText(this,"Ошибка", Toast.LENGTH_LONG).show();
         }
-    }
-
-    public void ChoosePhoto(View view)
-    {
-        getImg();
     }
 }
